@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Stashified</title>
+    {% load static %}
+    <!-- Css -->
+    <link href="{% static '/stashified/css/normalize.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static '/stashified/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static '/stashified/css/lightbox.css' %}" rel="stylesheet" type="text/css" media="all"/>
+    <link href="{% static '/stashified/css/style.css' %}" rel="stylesheet">
+
+</head>
+<body>
+<nav class="navbar navbar-default color-fill navbar-fixed-top">
+    <div class="col-md-12">
+        <div class="nav">
+            <button class="btn-nav">
+                <span class="icon-bar top"></span>
+                <span class="icon-bar middle"></span>
+                <span class="icon-bar bottom"></span>
+            </button>
+        </div>
+        <a class="navbar-brand" href="index.html">
+            <img class="logo" src="{% static 'stashified/img/logo.jpg' %}" alt="logo">
+        </a>
+        <div class="nav-content hideNav hidden">
+            <ul class="nav-list vcenter">
+                <li class="nav-item"><a class="item-anchor" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="item-anchor" href="register.html">Sign Up</a></li>
+                <li class="nav-item"><a class="item-anchor" href="about.html">My Profile</a></li>
+                <li class="nav-item"><a class="item-anchor" href="portfolio.html">My Stash</a></li>
+                <li class="nav-item"><a class="item-anchor" href="contact.html">Trade Corner</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<section id="portfolio">
+    <div class="container">
+        <ul class="portfolio-sorting list-inline text-center">
+            <li><a href="#" data-group="all" class="active">All</a>
+            </li>
+            <li><strong>| Styles: </strong></li>
+            {% for style in styles %}
+                <li><a href="#" data-group="{{ style.style__name }}">{{ style.style__name }}</a>
+                </li>
+            {% endfor %}
+            <li><strong>| Prints: </strong></li>
+            {% for print in prints %}
+                <li><a href="#" data-group="{{ print.name }}">{{ print.name }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="lightbox-grid square-thumbs" data-gallery-title="Gallery">
+                    <ul class="portfolio-items list-unstyled" id="grid">
+                        {% for bag in bags %}
+                            <li class="col-md-4 col-sm-12 col-xs-12 no-gutter"
+                                data-groups='["{{ bag.print.name }}","{{ bag.style.name }}"]'>
+                                <a href="{{ bag.image | safe }}" data-lightbox="true">
+                                    <div class="background-image-holder">
+                                        <img alt="portfolio" class="background-image" src="{{ bag.image | safe }}"/>
+                                    </div>
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- script -->
+<script src="{% static 'stashified/js/jquery.js' %}"></script>
+<script src="{% static 'stashified/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'stashified/js/lightbox-plus-jquery.js' %}"></script>
+<script src="{% static 'stashified/js/jquery.shuffle.min.js' %}"></script>
+<script src="{% static 'stashified/js/modernizr.js' %}"></script>
+<script src="{% static 'stashified/js/script.js' %}"></script>
+</body>
+</html>
